@@ -31,6 +31,14 @@ map("ni", "<F12>", "", {
     callback = func.run_code,
     desc = "run code",
     })
+
+-- Telescope file finder
+map("n", "<leader>ss", "", {callback = func.find_files, desc = "find files",})
+--map("n", "<leader>sg", function() vim.cmd("Telescope live_grep") end)
+--map("n", "<leader>sb", function() vim.cmd("Telescope buffers") end)
+--map("n", "<leader>sh", function() vim.cmd("Telescope help_tags") end)
+
+
     -- Better window navigation
 map("n", "<C-h>", "<C-w>h") -- left window
 map("n", "<C-k>", "<C-w>k") -- up window

@@ -52,6 +52,6 @@ opt.shiftwidth = 4 -- Size of an indent
 opt.tabstop = 4 -- Number of spaces tabs count for
 opt.expandtab = true -- Use spaces instead of tabs
 opt.shiftround = true -- Round indent
-opt.smartindent = true -- Insert indents automatically
+opt.autoindent = true -- Insert indents automatically
 vim.g.markdown_recommended_style = 0 -- Fix markdown indentation settings
 

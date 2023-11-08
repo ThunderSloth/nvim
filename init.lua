@@ -4,6 +4,7 @@ local reqs = {
         "lazy-config",
         "lualine-config",
         "nvim-tree-config",
+        "telescope-config",
         "skeletons",
 }
 for _, module in ipairs(reqs) do
