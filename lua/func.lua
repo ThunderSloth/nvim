@@ -21,13 +21,22 @@ funcs.run_fixer = function()
 	end
 end
 
-funcs.run_code = function()
+funcs.run_code = function(command)
+--	local function capture_cmd(command)
+--		local handle = io.popen(command)
+--		local result = handle:read("*a")
+--		handle.close()
+--		return result
+--	end
 	local filename = vim.fn.expand("%:p")
 	local dir_path = vim.fn.expand("%:p:h")
 	local cls_name = vim.fn.expand("%:t:r")
 	local filetype = vim.bo.filetype
 	local cmd = nil
+--	print(">"..capture_cmd("python --version"))
 	if filetype == "python" then
+		--print("1"..vim.cmd("python3 --version"))
+		--print("2"..vim.cmd("python --version"))
 		cmd = "sp | term python3 " .. filename
 	elseif filetype == "java" then
 		cmd = string.format("sp | term javac %s && java -cp %s %s", filename, dir_path, cls_name)
@@ -35,10 +44,11 @@ funcs.run_code = function()
 		cmd = "sp | term lua " .. filename
 	end
 	if cmd then
-		vim.cmd("w")
-		vim.cmd(cmd)
+		--vim.cmd("w")
+		--vim.cmd(cmd)
 	else
-		print("No interpreter or compiler defined for filetype: '" .. filetype .. "'")
+		--print("No interpreter or compiler defined for filetype: '" .. filetype .. "'")
+		print("hjsdjhsdjhds")
 	end
 end
 
