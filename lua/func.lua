@@ -22,27 +22,16 @@ funcs.run_fixer = function()
 end
 
 funcs.run_code = function()
-	local function fallback(progs)
-		for _, v in ipairs(progs) do
-			local is_windows = package.config:sub(1, 1) == '\\'
-			local prefix = is_windows and " > NUL 2>&1" or " > /dev/null 2>&1"
-			local cmd = v.." --version"..prefix
-			local status = os.execute(cmd)
-			if status == 0 then
-				return v
-			end
-		end
-		return nil
-	end
 	local filename = vim.fn.expand("%:p")
 	local dir_path = vim.fn.expand("%:p:h")
 	local cls_name = vim.fn.expand("%:t:r")
 	local filetype = vim.bo.filetype
 	local cmd = nil
 	if filetype == "python" then
-		local prog = fallback({"python3", "python"})
-		if prog then
-			cmd = string.format("sp | term %s %s", prog, filename)
+		if vim.g.python3 then
+			cmd = "sp | term python3 " .. filename
+		elseif vim.g.python then
+			cmd = "sp | term python " .. filename
 		end
 	elseif filetype == "java" then
 		cmd = string.format("sp | term javac %s && java -cp %s %s", filename, dir_path, cls_name)
@@ -53,7 +42,7 @@ funcs.run_code = function()
 		vim.cmd("w")
 		vim.cmd(cmd)
 	else
-		print("No interpreter or compiler defined for filetype: '" .. filetype .. "'")
+		print("No interpreter or compiler configured for filetype: '" .. filetype .. "'")
 	end
 end
 
