@@ -21,34 +21,39 @@ funcs.run_fixer = function()
 	end
 end
 
-funcs.run_code = function(command)
---	local function capture_cmd(command)
---		local handle = io.popen(command)
---		local result = handle:read("*a")
---		handle.close()
---		return result
---	end
+funcs.run_code = function()
+	local function fallback(progs)
+		for _, v in ipairs(progs) do
+			local is_windows = package.config:sub(1, 1) == '\\'
+			local prefix = is_windows and " > NUL 2>&1" or " > /dev/null 2>&1"
+			local cmd = v.." --version"..prefix
+			local status = os.execute(cmd)
+			if status == 0 then
+				return v
+			end
+		end
+		return nil
+	end
 	local filename = vim.fn.expand("%:p")
 	local dir_path = vim.fn.expand("%:p:h")
 	local cls_name = vim.fn.expand("%:t:r")
 	local filetype = vim.bo.filetype
 	local cmd = nil
---	print(">"..capture_cmd("python --version"))
 	if filetype == "python" then
-		--print("1"..vim.cmd("python3 --version"))
-		--print("2"..vim.cmd("python --version"))
-		cmd = "sp | term python3 " .. filename
+		local prog = fallback({"python3", "python"})
+		if prog then
+			cmd = string.format("sp | term %s %s", prog, filename)
+		end
 	elseif filetype == "java" then
 		cmd = string.format("sp | term javac %s && java -cp %s %s", filename, dir_path, cls_name)
 	elseif filetype == "lua" then
 		cmd = "sp | term lua " .. filename
 	end
 	if cmd then
-		--vim.cmd("w")
-		--vim.cmd(cmd)
+		vim.cmd("w")
+		vim.cmd(cmd)
 	else
-		--print("No interpreter or compiler defined for filetype: '" .. filetype .. "'")
-		print("hjsdjhsdjhds")
+		print("No interpreter or compiler defined for filetype: '" .. filetype .. "'")
 	end
 end
 
