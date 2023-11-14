@@ -1,7 +1,7 @@
 local reqs = {
+        "lazy-config",
         "options", 
         "keymaps",
-        "lazy-config",
         "lualine-config",
         "nvim-tree-config",
         "telescope-config",
