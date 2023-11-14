@@ -2,8 +2,8 @@ local opt = vim.opt
 
 --Display
 opt.termguicolors = true -- True color support
-vim.opt.cursorline = true
-vim.opt.cursorcolumn = true
+opt.cursorline = true
+opt.cursorcolumn = true
 opt.number = true -- Print line number
 opt.relativenumber = true -- Relative line numbers
 opt.showmode = false -- Dont show mode since we have a statusline
@@ -38,6 +38,8 @@ opt.undolevels = 10000 -- Size of undo-buffer
 opt.updatetime = 200 -- Milliseconds before crash-recovery save
 vim.api.nvim_create_autocmd({ "TermOpen", "WinEnter"},
 	{pattern = "term://*", command = "startinsert" }) -- Always enter term in insert-mode
+opt.foldmethod="indent"
+opt.foldlevel = 1000
 
 --Searching
 opt.grepformat = "%f:%l:%c:%m"

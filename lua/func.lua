@@ -34,7 +34,7 @@ funcs.run_code = function()
 			cmd = "sp | term python " .. filename
 		end
 	elseif filetype == "java" then
-		cmd = string.format("sp | term javac %s && java -cp %s %s", filename, dir_path, cls_name)
+		cmd = string.format("sp | term cd %s && javac *.java && java %s", dir_path, cls_name)
 	elseif filetype == "lua" then
 		cmd = "sp | term lua " .. filename
 	end
