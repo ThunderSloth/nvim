@@ -29,18 +29,18 @@ funcs.run_code = function()
 	local cmd = nil
 	if filetype == "python" then
 		if vim.g.python3 then
-			cmd = "sp | term python3 " .. filename
+			cmd = "python3 " .. filename
 		elseif vim.g.python then
-			cmd = "sp | term python " .. filename
+			cmd = "python " .. filename
 		end
 	elseif filetype == "java" then
-		cmd = string.format("sp | term cd %s && javac *.java && java %s", dir_path, cls_name)
+		cmd = "javac *.java && java " .. cls_name
 	elseif filetype == "lua" then
-		cmd = "sp | term lua " .. filename
+		cmd = "lua " .. filename
 	end
 	if cmd then
 		vim.cmd("w")
-		vim.cmd(cmd)
+		vim.cmd(("sp | term cd %s && %s"):format(dir_path, cmd))
 	else
 		print("No interpreter or compiler configured for filetype: '" .. filetype .. "'")
 	end

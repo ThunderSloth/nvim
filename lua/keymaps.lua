@@ -16,7 +16,7 @@ vim.g.mapleader = " "
 --   normal mode = "n",
 --   insert mode = "i",
 --   visual and select mode = "v",
---   visual mode= "x",
+--   visual mode = "x",
 --   term mode = "t",
 --   command mode = "c",
 
