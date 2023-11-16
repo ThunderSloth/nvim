@@ -40,7 +40,16 @@ vim.api.nvim_create_autocmd({ "TermOpen", "WinEnter"},
 	{pattern = "term://*", command = "startinsert" }) -- Always enter term in insert-mode
 opt.foldmethod="indent"
 opt.foldlevel = 1000
-
+vim.api.nvim_create_autocmd({"BufWinLeave"}, {
+  pattern = {"*.*"},
+  desc = "save view (folds), when closing file",
+  command = "mkview",
+})
+vim.api.nvim_create_autocmd({"BufWinEnter"}, {
+  pattern = {"*.*"},
+  desc = "load view (folds), when opening file",
+  command = "silent! loadview"
+})
 --Searching
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
