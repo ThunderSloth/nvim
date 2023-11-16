@@ -40,7 +40,9 @@ funcs.run_code = function()
 	end
 	if cmd then
 		vim.cmd("w")
-		vim.cmd(("sp | term cd %s && %s"):format(dir_path, cmd))
+		cmd = ("sp | term cd %s && %s"):format(dir_path, cmd)
+		print(cmd)
+		--vim.cmd(cmd)
 	else
 		print("No interpreter or compiler configured for filetype: '" .. filetype .. "'")
 	end
