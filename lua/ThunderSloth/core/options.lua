@@ -8,14 +8,14 @@ opt.number = true -- Print line number
 opt.relativenumber = true -- Relative line numbers
 opt.showmode = false -- Dont show mode since we have a statusline
 opt.laststatus = 0 -- No status line for last window
-opt.signcolumn = "yes" -- Always show the signcolumn, otherwise it would shift the text each time
+opt.signcolumn = "yes" -- Always show signcolumn, otherwise text will shift
 opt.conceallevel = 3 -- Hide * markup for bold and italic
 opt.list = true -- Show some invisible characters
 opt.pumblend = 10 -- Popup blend
 opt.pumheight = 10 -- Maximum number of entries in a popup
 opt.scrolloff = 5 -- Lines of context
 opt.sidescrolloff = 8 -- Columns of context
-opt.shortmess:append {c = true } -- Don't give ins-completion messages: https://neovim.io/doc/user/options.html#'shortmess'
+opt.shortmess:append({ I = true, c = true }) -- https://neovim.io/doc/user/options.html#'shortmess'
 opt.wildmode = "longest:full,full" -- Command-line completion mode
 opt.winminwidth = 5 -- Minimum window width
 opt.wrap = false -- Disable line wrap
@@ -36,20 +36,8 @@ opt.timeoutlen = 500 -- Speed must be under 500ms in order for keys to work, inc
 opt.undofile = true -- Save undo history
 opt.undolevels = 10000 -- Size of undo-buffer
 opt.updatetime = 200 -- Milliseconds before crash-recovery save
-vim.api.nvim_create_autocmd({ "TermOpen", "WinEnter"},
-	{pattern = "term://*", command = "startinsert" }) -- Always enter term in insert-mode
-opt.foldmethod="indent"
+opt.foldmethod = "indent"
 opt.foldlevel = 1000
-vim.api.nvim_create_autocmd({"BufWinLeave"}, {
-  pattern = {"*.*"},
-  desc = "save view (folds), when closing file",
-  command = "mkview",
-})
-vim.api.nvim_create_autocmd({"BufWinEnter"}, {
-  pattern = {"*.*"},
-  desc = "load view (folds), when opening file",
-  command = "silent! loadview"
-})
 --Searching
 opt.grepformat = "%f:%l:%c:%m"
 opt.grepprg = "rg --vimgrep"
@@ -65,4 +53,3 @@ opt.expandtab = true -- Use spaces instead of tabs
 opt.shiftround = true -- Round indent
 opt.autoindent = true -- Insert indents automatically
 vim.g.markdown_recommended_style = 0 -- Fix markdown indentation settings
-

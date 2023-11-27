@@ -1,6 +1,4 @@
-local funcs = {}
-
-funcs.run_fixer = function()
+vim.api.nvim_create_user_command("Fix", function()
 	local filename = vim.fn.expand("%:p")
 	local filetype = vim.bo.filetype
 	local cmd = nil
@@ -19,9 +17,9 @@ funcs.run_fixer = function()
 	else
 		print("No fixer defined for filetype: '" .. filetype .. "'")
 	end
-end
+end, { desc = "Run Fixer" })
 
-funcs.run_code = function()
+vim.api.nvim_create_user_command("Run", function()
 	local filename = vim.fn.expand("%:p")
 	local dir_path = vim.fn.expand("%:p:h")
 	local cls_name = vim.fn.expand("%:t:r")
@@ -44,17 +42,5 @@ funcs.run_code = function()
 	else
 		print("No interpreter or compiler configured for filetype: '" .. filetype .. "'")
 	end
-end
+end, { desc = "Run Code" })
 
-funcs.find_files = function()
-	vim.cmd("Telescope find_files")
-	--	local cwd = vim.fn.expand("%:p")
--- 	local top = string.match(cwd, "^([/\\]?[^/\\]*[/\\])")
---	if top then
---		require("telescope.builtin").find_files({
---			search_dirs = {}, -- Set the search directory based on the drive letter
---		})
---	end
-end
-
-return funcs
