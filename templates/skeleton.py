@@ -12,6 +12,7 @@ def main():
 
 
 if __name__ == '__main__':
-    print("\nWelcome to my script!\n")
+    desc = ""
+    print(f"\nWelcome to my {desc} script!\n")
     main()
-    print("\nThanks for using my script!")
+    print(f"\nThanks for using my {desc} script!")
