@@ -11,14 +11,17 @@ function map(mode, lhs, rhs, opts)
 end
 
 vim.g.mapleader = " "
+vim.g.maplocalleader = ','
 
--- Modes
---   normal mode = "n",
---   insert mode = "i",
---   visual and select mode = "v",
---   visual mode = "x",
---   term mode = "t",
---   command mode = "c",
+--[[
+	Modes:
+		normal = "n",
+		insert = "i",
+		visual/select = "v",
+		visual = "x",
+		term = "t",
+		command = "c",
+]]--
 
 -- User/Plugin commands
 map("n", "<leader>p", "<cmd>Lazy<CR>", "Plugin Manager")
@@ -33,8 +36,8 @@ map("n", "<leader>O", ':<C-u>call append(line(".")-1, repeat([""], v:count1))<CR
 -- Misc Shortcuts
 map("n", "<BS>", ":b#<CR>") -- alternate buffers
 map("i", "ZZ", "<Esc>ZZ") -- save and quit in insert
-map("n", "H", "^") -- beginning of line
-map("n", "L", "$") -- end of line
+map("n", "H", "^", "BOL") -- beginning of line
+map("n", "L", "$", "EOL") -- end of line
 map("n", "U", "<C-r>") -- undo
 
 -- Modify Default
