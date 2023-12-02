@@ -42,13 +42,10 @@ vim.api.nvim_create_user_command(
 		elseif filetype == "lua" then
 			cmd = "lua " .. filename
 		elseif filetype == "tex" then
-			vim.cmd("w")
-			vim.cmd("VimtexStop")
-			vim.cmd("VimtexCompile")
-			return
+			cmd = "latexmk -pdf " .. filename
 		end
 		if cmd then
-		vim.cmd("w")
+			vim.cmd("w")
 			cmd = ("sp | term cd %s && %s"):format(dir_path, cmd)
 			vim.cmd(cmd)
 		else
