@@ -60,8 +60,8 @@ map("n", "<C-j>", "<C-w>j") -- down window
 map("n", "<C-l>", "<C-w>l") -- right window
 
 -- Press 'jk' at the same time to exit insert mode
-map("i", "jk", "<esc>") -- Insert mode -> jk -> Normal mode
-map("i", "kj", "<esc>") -- Insert mode -> kj -> Normal mode
+map("nivxtc", "jk", "<esc>") -- Insert mode -> jk -> Normal mode
+map("nivxtc", "kj", "<esc>") -- Insert mode -> kj -> Normal mode
 
 -- Stay in indent mode
 map("v", "<", "<gv") -- Right Indentation

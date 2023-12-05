@@ -1,0 +1,63 @@
+treesitter to figure out when in math mode
+
+space after snippets
+
+never ending list
+
+possible keymaps:
+    C-h for jump left (remap window nav to C-H)
+    C-j for scroll down (remap window nav to C-J)
+    C-k for scroll up (remap window nav to C-K)
+    C-l for jump right (remap window nave to C-L)
+local ls = require("luasnip")
+vim.keymap.set({ "i", "s" }, "<C-l>", function()
+  if ls.choice_active() then
+    ls.change_choice(1)
+  end
+end)
+vim.keymap.set({ "i", "s" }, "<C-h>", function()
+  if ls.choice_active() then
+ ls.change_choice(-1)
+ end
+end)
+
+better font for u an v distinction
+
+--math symbols
+pi \pi
+th \theta
+
+--math operators
+//
+sq with choice node
+ex and ^ with default 2
+* \cdot 
+int
+ddx choice node for dydx ect
+
+-- formatting 
+beg \begin{<>*} choice for no * default gather
+beg e equation
+beg a align
+beg g gather
+
+( \left( <> \right)
+ds display style
+ls item and have insert node be on its own line for easier copy pasting
+; with spacing
+, with spacing
+-> Rightarrow
+
+-- functions
+sin \sin{()} call ( with choice node to do \sin^{2}() default 2
+cos
+tan
+sec
+csc
+cot
+
+asin sin^-1 
+
+ln() with choice for ln||
+
+

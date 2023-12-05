@@ -1,6 +1,6 @@
 return {
 	"L3MON4D3/LuaSnip",
-	dependencies = { "rafamadriz/friendly-snippets",  },
+	dependencies = { "rafamadriz/friendly-snippets" },
 	-- follow latest release.
 	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
 	-- install jsregexp (optional!).
@@ -24,10 +24,10 @@ return {
 		local fmt = require("luasnip.extras.fmt").fmt
 		local fmta = require("luasnip.extras.fmt").fmta
 		local types = require("luasnip.util.types")
-		local  conds = require("luasnip.extras.expand_conditions")
+		local conds = require("luasnip.extras.expand_conditions")
 
 		require("luasnip.loaders.from_vscode").lazy_load()
-		require("luasnip.loaders.from_lua").load({paths = "~/.config/nvim/snippets/"})
+		require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/" })
 
 		ls.config.set_config({
 			history = true, --keep around last snippet local to jump back
@@ -41,7 +41,9 @@ return {
 					},
 				},
 			},
-		}) 
+		})
+		-- ChoiceNode-Popup: Currently not configured. Use these references to implement:
+		-- https://github.com/pysan3/dotfiles/blob/main/nvim/lua/plugins/70-LuaSnip.lua
+		-- https://github.com/L3MON4D3/LuaSnip/wiki/Misc#choicenode-popupluasnip
 	end,
-
 }

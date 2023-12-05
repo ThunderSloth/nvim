@@ -10,6 +10,8 @@ vim.api.nvim_create_user_command(
 			cmd = "silent !java -jar ~/google-java-format-1.18.1-all-deps.jar -i " .. filename
 		elseif filetype == "lua" then
 			cmd = "silent !stylua " .. filename
+		elseif filetype == "tex" then
+			cmd = "silent !latexindent -w " .. filename
 		end
 		if cmd then
 			vim.cmd("w")
