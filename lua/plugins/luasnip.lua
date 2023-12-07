@@ -27,11 +27,21 @@ return {
 		local conds = require("luasnip.extras.expand_conditions")
 
 		require("luasnip.loaders.from_vscode").lazy_load()
-		require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/snippets/" })
+		require("luasnip.loaders.from_lua").load({ paths = "~/.config/nvim/lua/snippets/" })
 
-		ls.config.set_config({
+		ls.config.set_config({	
+			keep_roots = true,
+			link_roots = true,
+			link_children = true,
+
+			-- Update more often, :h events for more info.
+			update_events = "TextChanged,TextChangedI",
+			-- Snippets aren't automatically removed if their text is deleted.
+			-- `delete_check_events` determines on which events (:h events) a check for
+			-- deleted snippets is performed.
+			-- This can be especially useful when `history` is enabled.
+			delete_check_events = "TextChanged",
 			history = true, --keep around last snippet local to jump back
-			updateevents = "TextChanged,TextChangedI", --update changes as you type
 			enable_autosnippets = true,
 			ext_base_prio = 300,
 			ext_opts = {

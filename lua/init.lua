@@ -1,5 +1,5 @@
 -- Colorscheme
-vim.g.colorscheme = "habamax"
+vim.g.colorscheme = "iceberg"
 
 -- System Dependent Settings
 vim.g.is_win = vim.fn.has("win32") == 1

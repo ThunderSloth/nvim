@@ -27,6 +27,10 @@ vim.g.maplocalleader = ','
 map("n", "<leader>p", "<cmd>Lazy<CR>", "Plugin Manager")
 map("n", "<leader>x", "<cmd>Fix<CR>", "Run Fixer")
 map("ni", "<F12>", "<cmd>Run<CR>", "Run Code")
+map("n", "<leader>r", function()
+	local path = "~/.config/nvim/lua/snippets/"
+	require("luasnip.loaders").reload_file(path)
+end, "Reload Snippets")
 
 -- Leader
 map("n", "<leader>j", "i<cr><esc>", "Break Line")

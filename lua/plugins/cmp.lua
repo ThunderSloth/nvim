@@ -11,7 +11,6 @@ return {
 		"nvim-lspconfig",
 	},
 	config = function()
-		
 		local cmp_status_ok, cmp = pcall(require, "cmp")
 		if not cmp_status_ok then
 			return
@@ -24,7 +23,7 @@ return {
 
 		require("luasnip.loaders.from_vscode").lazy_load()
 
-		cmp.setup {
+		cmp.setup({
 			snippet = {
 				expand = function(args)
 					luasnip.lsp_expand(args.body) -- For `luasnip` users.
@@ -37,34 +36,34 @@ return {
 					elseif luasnip.choice_active() then
 						luasnip.change_choice(-1)
 					end
-				end,
-				{"i", "s"}),
+				end, { "i", "s" }),
 				["<C-j>"] = cmp.mapping(function()
 					if cmp.visible() then
 						cmp.select_next_item()
 					elseif luasnip.choice_active() then
 						luasnip.change_choice(1)
 					end
-				end,
-				{"i", "s"}),
+				end, { "i", "s" }),
 				["<C-h>"] = cmp.mapping(function()
 					if cmp.visible() then
-						cmp.confirm({select = false})
+						local mode = vim.fn.mode()
+						if mode == "i" then
+							cmp.abort()
+						elseif mode == "c" then
+							cmp.close()
+						end
+					elseif luasnip.jumpable() then
+						luasnip.jump(-1)
 					end
-					if luasnip.expand_or_jumpable() then
-						luasnip.expand_or_jump(-1)
-					end
-				end,
-				{"i", "s"}),
+				end, { "i", "s" }),
 				["<C-l>"] = cmp.mapping(function()
 					if cmp.visible() then
-						cmp.confirm({select = false})
+						cmp.confirm({ select = false })
 					end
 					if luasnip.expand_or_jumpable() then
 						luasnip.expand_or_jump(1)
 					end
-				end,
-				{"i", "s"}),
+				end, { "i", "s" }),
 				["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
 				["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
 				["<C-x>"] = cmp.mapping({
@@ -94,6 +93,6 @@ return {
 				},
 				-- more sources
 			},
-		}
+		})
 	end,
 }
