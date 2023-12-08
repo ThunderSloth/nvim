@@ -1,2 +1,2 @@
 # nvim
-personal neovim config, skeletons, plugins, etc
+personal neovim config
