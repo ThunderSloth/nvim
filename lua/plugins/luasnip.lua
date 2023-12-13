@@ -44,6 +44,7 @@ return {
 			history = true, --keep around last snippet local to jump back
 			enable_autosnippets = true,
 			ext_base_prio = 300,
+			store_selection_keys="<leader>",
 			ext_opts = {
 				[types.choiceNode] = {
 					active = {

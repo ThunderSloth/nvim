@@ -54,6 +54,8 @@ return {
 						end
 					elseif luasnip.jumpable() then
 						luasnip.jump(-1)
+					else
+						vim.cmd("norm B")
 					end
 				end, { "i", "s" }),
 				["<C-l>"] = cmp.mapping(function()
@@ -62,6 +64,18 @@ return {
 					end
 					if luasnip.expand_or_jumpable() then
 						luasnip.expand_or_jump(1)
+					else
+						vim.cmd("norm W")
+					end
+				end, { "i", "s" }),
+				["<tab>"] = cmp.mapping(function(fallback)
+					if cmp.visible() then
+						cmp.confirm({ select = false })
+					end
+					if luasnip.expand_or_jumpable() then
+						luasnip.expand_or_jump(1)
+					else
+						fallback()
 					end
 				end, { "i", "s" }),
 				["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),

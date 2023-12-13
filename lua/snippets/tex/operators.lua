@@ -1,6 +1,10 @@
 local utils = require("snippets.tex.utils")
 
-local M = {
+M = {
+	s( -- parenthesis
+		{trig = "(", snippetType = "autosnippet", priority = 2000},
+		{d(1, utils.smart_pairs, {}, {user_args = {{{i(1, "")}, "(", ")"}}}),}
+	),
 	s( -- fraction
 		{trig = "//", snippetType = "autosnippet",},
 		fmta([[\frac{<>}{<>} <>]], {i(1), i(2), i(3)})
@@ -16,22 +20,20 @@ local M = {
 		fmta(
 			[[\sqrt<><><>{<>} <>]],
 			{
-				f(function(args, parent, user_args)
-					return args[1][1] ~= "" and "[" or ""
-				end, {1}),
+				extras.nonempty(1, "[", ""),
 				d(1, utils.get_choices, {}, {user_args = {utils.defaults.root}}),
-				f(function(args, parent, user_args)
-					return args[1][1] ~= "" and "]" or ""
-				end, {1}),
+				extras.nonempty(1, "]", ""),
 				i(2), 
 				i(3), 
 			}
 		)
 	),
- 	s( -- pow
-		{trig = '(.)^', wordTrig = false, regTrig = true, snippetType="autosnippet"},
-		{ 
-			f( function(_, snip) return snip.captures[1] end ),
+	s( -- pow
+		{ trig = "([^^])^", wordTrig = false, regTrig = true, snippetType = "autosnippet" },
+		{
+			f(function(_, snip)
+				return snip.captures[1]
+			end),
 			d(1, utils.get_choices, {}, {user_args = {utils.defaults.pow}}),
 			i(2),
 		}
@@ -68,16 +70,16 @@ local M = {
 			i(2, "x")
 		})
 	),
-	s(
+	s( -- abs and bounds
 		{trig = "|", snippetType = "autosnippet", },
 		fmta( [[<> <>]],
 		{
-			c(1,{ 
-				d(nil, utils.smart_pairs, {}, {user_args = {{i(1, "x"), "|", "|"}}}),
+			c(1, { 
+				d(1, utils.smart_pairs, {}, {user_args = {{{i(1, "x")}, "|", "|"}}}),
 				fmta(
 					[[\Big|_{<>}^{<>}]],
 					{i(1, "a"), i(2, "b")}
-				),
+				)
 			}),
 			i(2),
 		})
