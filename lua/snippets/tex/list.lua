@@ -1,4 +1,3 @@
-
 -- function for the dynamicNode.
 local lst = function(args, snip)
 	if not snip.rows then
@@ -16,8 +15,8 @@ local lst = function(args, snip)
 end
 
 local M = {
-	s({ trig = "lst" }, {
-		t({ "\\hello", "" }),
+	s({ trig = "gat" }, {
+		t({ "\\begin{gather*}", "" }),
 		d(1, lst, {}, {
 			user_args = {
 				-- Pass the functions used to manually update the dynamicNode as user args.
@@ -33,8 +32,9 @@ local M = {
 				end,
 			},
 		}),
-		t({ "\\world" }),
+		t({ "\\end{gather*}" }),
 	}),
 }
 
 return M
+

@@ -185,4 +185,6 @@ local M = {
 	end,
 }
 
+M = vim.tbl_extend("force", M, require("snippets.tex.utils.context"))
+
 return M

@@ -1,6 +1,6 @@
 return {
 	"L3MON4D3/LuaSnip",
-	dependencies = { "rafamadriz/friendly-snippets" },
+	dependencies = { "rafamadriz/friendly-snippets", "nvim-treesitter/nvim-treesitter", },
 	-- follow latest release.
 	version = "v2.*", -- Replace <CurrentMajor> by the latest released major (first number of latest release)
 	-- install jsregexp (optional!).
