@@ -35,6 +35,8 @@ return {
 						cmp.select_prev_item()
 					elseif luasnip.choice_active() then
 						luasnip.change_choice(-1)
+					else
+						require("snippets.tex.utils").update_list(2)
 					end
 				end, { "i", "s" }),
 				["<C-j>"] = cmp.mapping(function()
@@ -42,6 +44,8 @@ return {
 						cmp.select_next_item()
 					elseif luasnip.choice_active() then
 						luasnip.change_choice(1)
+					else
+						require("snippets.tex.utils").update_list(1)
 					end
 				end, { "i", "s" }),
 				["<C-h>"] = cmp.mapping(function()
@@ -59,9 +63,6 @@ return {
 					end
 				end, { "i", "s" }),
 				["<C-l>"] = cmp.mapping(function()
-					if cmp.visible() then
-						cmp.confirm({ select = false })
-					end
 					if luasnip.expand_or_jumpable() then
 						luasnip.expand_or_jump(1)
 					else
@@ -69,9 +70,6 @@ return {
 					end
 				end, { "i", "s" }),
 				["<tab>"] = cmp.mapping(function(fallback)
-					if cmp.visible() then
-						cmp.confirm({ select = false })
-					end
 					if luasnip.expand_or_jumpable() then
 						luasnip.expand_or_jump(1)
 					else
