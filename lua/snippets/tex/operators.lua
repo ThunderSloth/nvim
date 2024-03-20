@@ -81,6 +81,11 @@ M = {
 		}),
 		{ condition = in_mathzone }
 	),
+	s( -- not
+		{ trig = "ov", snippetType = "autosnippet" },
+		fmta([[\overline{<>} <>]], { i(1), i(2) }),
+		{ condition = in_mathzone }
+	),
 }
 
 return M

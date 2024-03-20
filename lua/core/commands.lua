@@ -25,13 +25,33 @@ vim.api.nvim_create_user_command(
 	{ desc = "Run Fixer" }
 )
 
+
+-- Copy the Makefile to the working directory
+local function copy_makefile(source, destination)
+    local source_file = io.open(source, "r")
+    local destination_file = io.open(destination, "w")
+
+    if source_file and destination_file then
+        destination_file:write(source_file:read("*a"))
+        source_file:close()
+        destination_file:close()
+        return true
+    else
+        return false
+    end
+end
+
 vim.api.nvim_create_user_command(
 	"Run",
 	function()
 		local filename = vim.fn.expand("%:p")
 		local dir_path = vim.fn.expand("%:p:h")
+		--local parent_dir = dir_path:match("^.*/(.+)/?$")
+		--local name = dir_path:match("^.*/(.+)/?$")
 		local cls_name = vim.fn.expand("%:t:r")
 		local filetype = vim.bo.filetype
+		local lua_path = vim.o.runtimepath:match("([^,]+)") .. "/lua"
+
 		local cmd = nil
 		if filetype == "python" then
 			if vim.g.python3 then
@@ -39,11 +59,17 @@ vim.api.nvim_create_user_command(
 			elseif vim.g.python then
 				cmd = "python " .. filename
 			end
+		elseif filetype == "cpp" then
+			cmd = ("g++ -o %s %s.cpp && ./%s"):format(cls_name, cls_name, cls_name)
 		elseif filetype == "java" then
 			cmd = "javac *.java && java " .. cls_name
 		elseif filetype == "lua" then
 			cmd = "lua " .. filename
 		elseif filetype == "tex" then
+			local makefile_source = lua_path .. "/core/Makefile"
+			local makefile_destination =  dir_path .. "/Makefile"
+			copy_makefile(makefile_source, makefile_destination)
+			vim.fn.system("make")
 			cmd = "latexmk -pdf " .. filename
 		end
 		if cmd then
@@ -56,6 +82,7 @@ vim.api.nvim_create_user_command(
 	end,
 	{ desc = "Run Code" }
 )
+
 
 vim.api.nvim_create_user_command(
 	"Skeleton", 

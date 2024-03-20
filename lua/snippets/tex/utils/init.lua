@@ -155,7 +155,7 @@ local M = {
 	smart_pairs = function(args, parent, old_state, user_args)
 		local nodes, LHS, RHS = unpack(user_args)
 		local use_LR = function(text)
-			return text:match("frac") ~= nil or text:match("[_^]") ~= nil
+			return text:match("frac") ~= nil or text:match("[_^]") ~= nil or text:match("\\overline")
 		end
 		return sn(1, {
 			d(

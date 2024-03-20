@@ -1,8 +1,12 @@
 local M = {
 
-	s( -- ,
-		{trig = ",", snippetType = "autosnippet",},
-		t([[\,\,, ]])
+	s( -- space
+		{trig = "  ", snippetType = "autosnippet",},
+		t([[\,]])
+	),
+	s( -- big space
+		{trig = "qq", snippetType = "autosnippet",},
+		t([[\quad ]])
 	),
 	s( -- ;
 		{trig = ";", snippetType = "autosnippet",},

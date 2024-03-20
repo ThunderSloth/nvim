@@ -69,13 +69,14 @@ return {
 						vim.cmd("norm W")
 					end
 				end, { "i", "s" }),
-				["<tab>"] = cmp.mapping(function(fallback)
-					if luasnip.expand_or_jumpable() then
-						luasnip.expand_or_jump(1)
-					else
-						fallback()
-					end
-				end, { "i", "s" }),
+				-- overloaded tab too annoying, especially for py
+				--["<tab>"] = cmp.mapping(function(fallback)
+					--if luasnip.expand_or_jumpable() then
+						--luasnip.expand_or_jump(1)
+					--else
+						--fallback()
+					--end
+				--end, { "i", "s" }),
 				["<C-u>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
 				["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
 				["<C-x>"] = cmp.mapping({
