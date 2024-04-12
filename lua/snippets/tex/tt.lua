@@ -50,7 +50,7 @@ local function getTable(nInputs, nOutputs)
 	) .. "\n\t\t" .. table.concat(header, " & ") .. "\\\\\n\t\t\\hline\n"
 
 	for _i, _v in ipairs(_t) do
-		table.insert(_t[_i], 1, ("m_{%d}"):format(_i))
+		table.insert(_t[_i], 1, ("m_{%d}"):format(_i-1))
 		for _j = 1, nOutputs do
 			_t[_i][#_t[_i] + 1] = " "
 		end
