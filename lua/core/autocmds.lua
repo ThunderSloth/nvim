@@ -1,9 +1,3 @@
-local function file_exists(name)
-   local f=io.open(name,"r")
-   if f~=nil then io.close(f) return true else return false end
-end
-
-
 vim.api.nvim_create_autocmd({ "BufNewFile" }, {
     pattern = "*.*",
     callback = function()
@@ -13,7 +7,7 @@ vim.api.nvim_create_autocmd({ "BufNewFile" }, {
         local fname = ""
 
         -- Check if the file name matches a specific pattern, if not use default template for extension
-        if not file_exists(path .. root .. '.' .. ext) then
+        if not vim.g.file_exists(path .. root .. '.' .. ext) then
             root = "skeleton"
 		end
 

@@ -55,12 +55,16 @@ vim.api.nvim_create_user_command("Run", function()
 			cmd = "python " .. filename
 		end
 	elseif filetype == "cpp" then
+		-- need to implement cmake/make solution
 		cmd = ("g++ -o %s %s.cpp && ./%s"):format(cls_name, cls_name, cls_name)
 	elseif filetype == "java" then
 		cmd = "javac *.java && java " .. cls_name
 	elseif filetype == "lua" then
 		cmd = "lua " .. filename
 	elseif filetype == "tex" then
+		-- I misunderstood how 'make' works; pretty sure I don't have to run
+		-- latexmk if I run 'make'
+		-- I'll have to implement a solution, but right now it isn't outputting to the correct dir.
 		local makefile_source = lua_path .. "/core/Makefile"
 		local makefile_destination = dir_path .. "/Makefile"
 		copy_makefile(makefile_source, makefile_destination)
