@@ -55,8 +55,13 @@ vim.api.nvim_create_user_command("Run", function()
 			cmd = "python " .. filename
 		end
 	elseif filetype == "cpp" then
-		-- need to implement cmake/make solution
-		cmd = ("g++ -o %s %s.cpp && ./%s"):format(cls_name, cls_name, cls_name)
+		if not vim.g.file_exists(dir_path.."/CMakeLists.txt") then
+			local makefile_source = vim.fn.stdpath("config") .. "/templates/CMakeLists.txt"
+			local makefile_destination = dir_path .. "/CMakeLists.txt"
+			copy_makefile(makefile_source, makefile_destination)
+			vim.fn.system("cmake .")
+		end
+		cmd = "make && ./main"
 	elseif filetype == "java" then
 		cmd = "javac *.java && java " .. cls_name
 	elseif filetype == "lua" then
