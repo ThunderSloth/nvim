@@ -4,17 +4,11 @@ vim.api.nvim_create_autocmd({ "BufNewFile" }, {
         local path = vim.api.nvim_list_runtime_paths()[1] .. "/templates/"
         local ext = vim.fn.expand("%:e")
 		local root = vim.fn.expand("%:t:r")
-        local fname = ""
-
         -- Check if the file name matches a specific pattern, if not use default template for extension
-        if not vim.g.file_exists(path .. root .. '.' .. ext) then
-            root = "skeleton"
-		end
-
-        fname = path .. root .. "." .. ext
-
+		local fname = path .. (vim.g.file_exists(path .. root .. '.' .. ext) and root or "skeleton") ..'.' .. ext
         vim.cmd(("silent! execute '0r %s'"):format(fname))
         vim.cmd("%substitute#\\[:VIM_EVAL:\\]\\(.\\{-\\}\\)\\[:END_EVAL:\\]#\\=eval(submatch(1))#ge")
+        vim.cmd("%substitute#\\[:LUA_EVAL:\\]\\(.\\{-\\}\\)\\[:END_EVAL:\\]#\\=luaeval(submatch(1))#ge")
     end,
     desc = "Load From Templates",
 })

@@ -29,7 +29,12 @@ local function copy_makefile(source, destination)
 	local destination_file = io.open(destination, "w")
 
 	if source_file and destination_file then
-		destination_file:write(source_file:read("*a"))
+		local content = source_file:read("*a")
+		content = content:gsub("%[:LUA_EVAL:%](.-)%[:END_EVAL:%]", function(expr)
+			local f = load("return "..expr)
+			return f and f() or expr
+        end)
+		destination_file:write(content)
 		source_file:close()
 		destination_file:close()
 		return true
@@ -41,9 +46,7 @@ end
 vim.api.nvim_create_user_command("Run", function()
 	local filename = vim.fn.expand("%:p")
 	local dir_path = vim.fn.expand("%:p:h")
-	--local parent_dir = dir_path:match("^.*/(.+)/?$")
-	--local name = dir_path:match("^.*/(.+)/?$")
-	local cls_name = vim.fn.expand("%:t:r")
+	local root = vim.fn.expand("%:t:r")
 	local filetype = vim.bo.filetype
 	local lua_path = vim.o.runtimepath:match("([^,]+)") .. "/lua"
 
@@ -61,9 +64,9 @@ vim.api.nvim_create_user_command("Run", function()
 			copy_makefile(makefile_source, makefile_destination)
 			vim.fn.system("cmake .")
 		end
-		cmd = "make && ./main"
+		cmd = "make && ./" .. root
 	elseif filetype == "java" then
-		cmd = "javac *.java && java " .. cls_name
+		cmd = "javac *.java && java " .. root
 	elseif filetype == "lua" then
 		cmd = "lua " .. filename
 	elseif filetype == "tex" then
