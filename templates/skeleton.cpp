@@ -1,6 +1,5 @@
-//
 // Eli Bell
-// [:VIM_EVAL:]strftime('%F')[:END_EVAL:]
+// [:LUA_EVAL:]vim.fn.strftime('%F')[:END_EVAL:]
 
 #include<iostream>
 #include<fstream>

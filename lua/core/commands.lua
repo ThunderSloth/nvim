@@ -46,6 +46,7 @@ end
 vim.api.nvim_create_user_command("Run", function()
 	local filename = vim.fn.expand("%:p")
 	local dir_path = vim.fn.expand("%:p:h")
+	local proj = dir_path:match("[^/]*$")
 	local root = vim.fn.expand("%:t:r")
 	local filetype = vim.bo.filetype
 	local lua_path = vim.o.runtimepath:match("([^,]+)") .. "/lua"
@@ -64,7 +65,7 @@ vim.api.nvim_create_user_command("Run", function()
 			copy_makefile(makefile_source, makefile_destination)
 			vim.fn.system("cmake .")
 		end
-		cmd = "make && ./" .. root
+		cmd = "make && ./" .. proj
 	elseif filetype == "java" then
 		cmd = "javac *.java && java " .. root
 	elseif filetype == "lua" then

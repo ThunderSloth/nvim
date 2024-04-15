@@ -1,6 +1,6 @@
 cmake_minimum_required(VERSION 3.10)
 
-project(project_name)
+project([:LUA_EVAL:]vim.fn.expand("%:p:h"):match("[^/]*$")[:END_EVAL:])
 
 set(CMAKE_CXX_STANDARD 11)
 
@@ -8,5 +8,4 @@ set(CMAKE_CXX_STANDARD 11)
 file(GLOB SOURCES *.cpp)
 
 # Create an executable target and add all the .cpp files to it
-add_executable(my_executable ${SOURCES})
-
+add_executable([:LUA_EVAL:]vim.fn.expand("%:p:h"):match("[^/]*$")[:END_EVAL:] ${SOURCES})
