@@ -6,6 +6,8 @@
 
 #include<iostream>
 
+using namespace std;
+
 class [:LUA_EVAL:]vim.fn.expand("%:r"):gsub("^%l", string.upper)[:END_EVAL:]
 {
   private:
