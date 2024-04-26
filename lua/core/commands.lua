@@ -71,14 +71,13 @@ vim.api.nvim_create_user_command("Run", function()
 	elseif filetype == "lua" then
 		cmd = "lua " .. filename
 	elseif filetype == "tex" then
-		-- I misunderstood how 'make' works; pretty sure I don't have to run
-		-- latexmk if I run 'make'
-		-- I'll have to implement a solution, but right now it isn't outputting to the correct dir.
-		local makefile_source = lua_path .. "/core/Makefile"
-		local makefile_destination = dir_path .. "/Makefile"
-		copy_makefile(makefile_source, makefile_destination)
-		vim.fn.system("make")
-		cmd = "latexmk -pdf " .. filename
+		if not vim.g.file_exists(dir_path.."/Makefile") then
+			local makefile_source = vim.fn.stdpath("config") .. "/templates/tex/Makefile"
+			local makefile_destination = dir_path .. "/Makefile"
+			copy_makefile(makefile_source, makefile_destination)
+		end
+		cmd = "make"
+		--cmd = "latexmk -pdf " .. filename
 	end
 	if cmd then
 		vim.cmd("w")
