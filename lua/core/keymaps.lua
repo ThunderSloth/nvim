@@ -1,18 +1,8 @@
-function map(mode, lhs, rhs, opts)
-	local options = { noremap = true, silent = true }
-	if type(opts) == "string" then
-		options.desc = opts
-	elseif type(opts) == "table" then
-		options = vim.tbl_extend("force", options, opts)
-	end
-	for char in mode:gmatch(".") do
-		vim.keymap.set(char, lhs, rhs, options)
-	end
-end
 
 vim.g.mapleader = " "
 vim.g.maplocalleader = ','
 
+local map = vim.g.map
 --[[
 	Modes:
 		normal = "n",

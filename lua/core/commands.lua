@@ -65,7 +65,7 @@ vim.api.nvim_create_user_command("Run", function()
 			copy_makefile(makefile_source, makefile_destination)
 			vim.fn.system("cmake .")
 		end
-		cmd = "make && ./" .. proj
+		cmd = "make && ./main"
 	elseif filetype == "java" then
 		cmd = "javac *.java && java " .. root
 	elseif filetype == "lua" then

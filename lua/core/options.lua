@@ -21,6 +21,7 @@ opt.winminwidth = 5 -- Minimum window width
 opt.wrap = false -- Disable line wrap
 
 --Behavior
+opt.acd = true
 opt.spell = true
 opt.spelllang = { "en" }
 opt.autowrite = true -- Enable auto write
