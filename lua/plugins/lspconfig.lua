@@ -15,7 +15,9 @@ return {
 			lspconfig.pyright.setup({})
 			lspconfig.lua_ls.setup({})
 			lspconfig.texlab.setup({})
-			lspconfig.clangd.setup({})
+			lspconfig.clangd.setup({
+				cmd = { "clangd-mp-11" }
+			})
 			---- Global mappings.
 			---- See `:help vim.diagnostic.*` for documentation on any of the below functions
 			--vim.keymap.set('n', '<space>dd', vim.diagnostic.open_float)
