@@ -1,10 +1,19 @@
-"""
-... description ...
-
-Eli Bell
-[:VIM_EVAL:]strftime('%F')[:END_EVAL:]
-"""
-
+#*****************************************************************************
+#***************************** Python Source Code  ***************************
+#*****************************************************************************
+#
+#  DESIGNER NAME:  Eli Bell 
+#
+#      FILE NAME:  [:VIM_EVAL:]expand('%:t')[:END_EVAL:]
+#
+#-----------------------------------------------------------------------------
+#
+# DESCRIPTION:
+#   This code is intended to run on the Raspberry Pi single board computer
+#   running Raspberry Pi OS. It provides a 
+#
+#*****************************************************************************
+#*****************************************************************************
 
 def main():
     """ Main method. """
@@ -12,7 +21,4 @@ def main():
 
 
 if __name__ == '__main__':
-    desc = ""
-    print(f"\nWelcome to my {desc} script!\n")
     main()
-    print(f"\nThanks for using my {desc} script!")
