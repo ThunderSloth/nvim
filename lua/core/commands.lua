@@ -4,7 +4,7 @@ vim.api.nvim_create_user_command("Fix", function()
 	local cmd = nil
 	if filetype == "python" then
 		cmd = "silent !black " .. filename
-	elseif filetype == "cpp" then
+	elseif (filetype == "cpp" or filetype == "c") then
 		cmd = "silent !clang-format -i " .. filename
 	elseif filetype == "java" then
 		cmd = "silent !java -jar ~/google-java-format-1.18.1-all-deps.jar -i " .. filename
@@ -58,6 +58,8 @@ vim.api.nvim_create_user_command("Run", function()
 		elseif vim.g.python then
 			cmd = "python " .. filename
 		end
+	elseif filetype == "c" then
+		cmd = ("clang -o %s %s.c && ./%s"):format(root, root, root)
 	elseif filetype == "cpp" then
 		if not vim.g.file_exists(dir_path.."/CMakeLists.txt") then
 			local makefile_source = vim.fn.stdpath("config") .. "/templates/CMakeLists.txt"
@@ -71,13 +73,15 @@ vim.api.nvim_create_user_command("Run", function()
 	elseif filetype == "lua" then
 		cmd = "lua " .. filename
 	elseif filetype == "tex" then
+		--[[ -- commented out code is for large modular projects
 		if not vim.g.file_exists(dir_path.."/Makefile") then
 			local makefile_source = vim.fn.stdpath("config") .. "/templates/tex/Makefile"
 			local makefile_destination = dir_path .. "/Makefile"
 			copy_makefile(makefile_source, makefile_destination)
 		end
 		cmd = "make"
-		--cmd = "latexmk -pdf " .. filename
+		]]
+		cmd = "latexmk -pdf " .. filename
 	end
 	if cmd then
 		vim.cmd("w")
