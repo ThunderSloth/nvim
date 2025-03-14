@@ -4,7 +4,7 @@
 #
 #   DESIGNER NAME:  Eli Bell
 #
-#       FILE NAME:  [:VIM_EVAL:]expand("%p")[:END_EVAL:]
+#       FILE NAME:  test.py
 #
 #     DESCRIPTION:
 #
@@ -151,6 +151,11 @@ def loop():
 def main():
     button_press_counter = 0
 
+    print("")
+    print("********************** PROGRAM IS RUNNING **********************")
+    print(f"********************** {"test.py":^20} **********************\n")
+    print("Press CTRL-C to end the program.\n")
+
     try:
         gpio_handle = setup_gpio()
 
@@ -161,18 +166,12 @@ def main():
 
     finally:
         gpio_handle.cleanup()
+        print("")
+        print("GPIO Ports have been cleaned up.\n")
+        print("********************** PROGRAM TERMINATED **********************\n")
 
 
 # -----------------------------------------------------------------------------
 if __name__ == "__main__":
-    print("")
-    print("********************** PROGRAM IS RUNNING **********************")
-    print(f"********************** {'[:VIM_EVAL:]expand("%p")[:END_EVAL:]':^20} **********************\n")
-    print("Press CTRL-C to end the program.\n")
-
     main()
-
-    print("")
-    print("GPIO Ports have been cleaned up.\n")
-    print("********************** PROGRAM TERMINATED **********************\n")
 
