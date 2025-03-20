@@ -3,7 +3,7 @@ local M = {}
 table.insert(
 	M,
 	s( -- begin
-		{ trig = "beg", snippetType = "autosnippet" },
+		{ trig = "beg"},
 			fmta([[
 \begin{<><>}
     <>\\

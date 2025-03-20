@@ -21,6 +21,7 @@ map("n", "<leader>r", function()
 	local path = "~/.config/nvim/lua/snippets/"
 	require("luasnip.loaders").reload_file(path)
 end, "Reload Snippets")
+map("n", "<leader>c", "<cmd>Neogen<CR>", "Generate Annotation")
 
 -- Leader
 map("n", "<leader>j", "i<cr><esc>", "Break Line")
