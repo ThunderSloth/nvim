@@ -1,9 +1,5 @@
 local M = {
 
-	s( -- space
-		{trig = "  ", snippetType = "autosnippet",},
-		t([[\,]])
-	),
 	s( -- big space
 		{trig = "qq", snippetType = "autosnippet",},
 		t([[\quad ]])

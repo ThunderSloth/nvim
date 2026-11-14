@@ -1,3 +1,5 @@
+G_MODULAR_TEX_PROJ = true
+
 vim.api.nvim_create_user_command("Fix", function()
 	local filename = vim.fn.expand("%:p")
 	local filetype = vim.bo.filetype
@@ -12,6 +14,8 @@ vim.api.nvim_create_user_command("Fix", function()
 		cmd = "silent !stylua " .. filename
 	elseif filetype == "tex" then
 		cmd = "silent !latexindent -w " .. filename
+	elseif filetype == "vhdl" then
+		cmd = "silent !vsg --fix " .. filename
 	end
 	if cmd then
 		vim.cmd("w")
@@ -73,15 +77,7 @@ vim.api.nvim_create_user_command("Run", function()
 	elseif filetype == "lua" then
 		cmd = "lua " .. filename
 	elseif filetype == "tex" then
-		--[[ -- commented out code is for large modular projects
-		if not vim.g.file_exists(dir_path.."/Makefile") then
-			local makefile_source = vim.fn.stdpath("config") .. "/templates/tex/Makefile"
-			local makefile_destination = dir_path .. "/Makefile"
-			copy_makefile(makefile_source, makefile_destination)
-		end
-		cmd = "make"
-		]]
-		cmd = "latexmk -pdf " .. filename
+		cmd = "latexpdf " .. filename
 	end
 	if cmd then
 		vim.cmd("w")
